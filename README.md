@@ -54,12 +54,13 @@ cd backend
 npm install
 ```
 
-4. Create a `.env` file in the root of backend:
+4. Create a `.env` file in the root of backend. Use the mongo uri provided below for datbase access:
 
 ```
 JWT_SECRET=your_secret_key
-MONGO_URI=your_mongo_connection_string
+MONGO_URI=mongodb+srv://dhruvselopal:2aMMcb4Nk1VWYBx2@wysapersonalitytestclus.1kdkyzq.mongodb.net/PersonalityTestDb
 ```
+You can add you own jwt secret
 
 > Note: MongoDB is already hosted, so no need to set up a local database.
 
