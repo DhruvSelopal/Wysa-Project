@@ -6,18 +6,6 @@ This is a full-stack personality assessment application that evaluates users thr
 
 The project is built with a clear separation of frontend and backend, following a structured controller-service architecture.
 
----
-
-## ✨ Features
-
-- Dynamic personality test questionnaire
-- Backend-driven question flow
-- User state tracking across sessions
-- Modular backend architecture (Controller → Service → Database)
-- Fully deployed frontend and backend services
-
----
-
 ## 🛠 Tech Stack
 
 **Frontend**
