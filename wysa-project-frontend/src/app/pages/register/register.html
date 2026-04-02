@@ -1,0 +1,120 @@
+<div class="page-center">
+  <div class="auth-wrapper fade-in">
+
+    <div class="brand-header">
+      <div class="brand-logo">🧠</div>
+      <h1 class="brand-name">Wysa</h1>
+      <p class="brand-tagline">Start your self-discovery</p>
+    </div>
+
+    <div class="card auth-card">
+      <div class="auth-card-header">
+        <h2 class="auth-title">Create your account</h2>
+        <p class="auth-subtitle">Join Wysa and unlock your personality insights</p>
+      </div>
+
+      @if (error()) {
+        <div class="alert alert-error">
+          <span>⚠️</span>
+          <span>{{ error() }}</span>
+        </div>
+      }
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="field-group">
+          <label class="field-label" for="reg-name">Full name</label>
+          <input
+            id="reg-name"
+            type="text"
+            formControlName="name"
+            class="field-input"
+            [class.error]="isFieldInvalid('name')"
+            placeholder="Your name"
+            autocomplete="name">
+          @if (isFieldInvalid('name')) {
+            <span class="field-error">Name must be at least 2 characters</span>
+          }
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="reg-email">Email address</label>
+          <input
+            id="reg-email"
+            type="email"
+            formControlName="email"
+            class="field-input"
+            [class.error]="isFieldInvalid('email')"
+            placeholder="you@example.com"
+            autocomplete="email">
+          @if (isFieldInvalid('email')) {
+            <span class="field-error">Please enter a valid email address</span>
+          }
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="reg-password">Password</label>
+          <input
+            id="reg-password"
+            type="password"
+            formControlName="password"
+            class="field-input"
+            [class.error]="isFieldInvalid('password')"
+            placeholder="At least 6 characters"
+            autocomplete="new-password">
+          @if (isFieldInvalid('password')) {
+            <span class="field-error">Password must be at least 6 characters</span>
+          }
+        </div>
+
+        <div class="field-row">
+          <div class="field-group flex-1">
+            <label class="field-label" for="reg-age">Age</label>
+            <input
+              id="reg-age"
+              type="number"
+              formControlName="age"
+              class="field-input"
+              [class.error]="isFieldInvalid('age')"
+              placeholder="25"
+              min="1"
+              max="120">
+            @if (isFieldInvalid('age')) {
+              <span class="field-error">Enter a valid age</span>
+            }
+          </div>
+
+          <div class="field-group flex-1">
+            <label class="field-label" for="reg-birthdate">Birthdate</label>
+            <input
+              id="reg-birthdate"
+              type="date"
+              formControlName="birthdate"
+              class="field-input"
+              [class.error]="isFieldInvalid('birthdate')">
+            @if (isFieldInvalid('birthdate')) {
+              <span class="field-error">Birthdate is required</span>
+            }
+          </div>
+        </div>
+
+        <button
+          id="register-submit-btn"
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="isLoading()">
+          @if (isLoading()) {
+            <span class="spinner"></span>
+            <span>Creating account…</span>
+          } @else {
+            <span>Create Account</span>
+          }
+        </button>
+      </form>
+
+      <p class="auth-link">
+        Already have an account?
+        <a routerLink="/login" class="link">Sign in</a>
+      </p>
+    </div>
+  </div>
+</div>

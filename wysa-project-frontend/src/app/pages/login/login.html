@@ -1,0 +1,74 @@
+<div class="page-center">
+  <div class="auth-wrapper fade-in">
+
+    <div class="brand-header">
+      <div class="brand-logo">🧠</div>
+      <h1 class="brand-name">Wysa</h1>
+      <p class="brand-tagline">Discover your personality</p>
+    </div>
+
+    <div class="card auth-card">
+      <div class="auth-card-header">
+        <h2 class="auth-title">Welcome back</h2>
+        <p class="auth-subtitle">Sign in to continue your journey</p>
+      </div>
+
+      @if (error()) {
+        <div class="alert alert-error">
+          <span>⚠️</span>
+          <span>{{ error() }}</span>
+        </div>
+      }
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="field-group">
+          <label class="field-label" for="login-email">Email address</label>
+          <input
+            id="login-email"
+            type="email"
+            formControlName="email"
+            class="field-input"
+            [class.error]="isFieldInvalid('email')"
+            placeholder="you@example.com"
+            autocomplete="email">
+          @if (isFieldInvalid('email')) {
+            <span class="field-error">Please enter a valid email address</span>
+          }
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="login-password">Password</label>
+          <input
+            id="login-password"
+            type="password"
+            formControlName="password"
+            class="field-input"
+            [class.error]="isFieldInvalid('password')"
+            placeholder="Enter your password"
+            autocomplete="current-password">
+          @if (isFieldInvalid('password')) {
+            <span class="field-error">Password must be at least 6 characters</span>
+          }
+        </div>
+
+        <button
+          id="login-submit-btn"
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="isLoading()">
+          @if (isLoading()) {
+            <span class="spinner"></span>
+            <span>Signing in…</span>
+          } @else {
+            <span>Sign In</span>
+          }
+        </button>
+      </form>
+
+      <p class="auth-link">
+        Don't have an account?
+        <a routerLink="/register" class="link">Create one</a>
+      </p>
+    </div>
+  </div>
+</div>

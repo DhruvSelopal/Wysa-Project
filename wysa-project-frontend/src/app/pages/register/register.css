@@ -1,0 +1,79 @@
+.auth-wrapper {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.brand-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-logo {
+  font-size: 52px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 16px rgba(124, 58, 237, 0.5));
+}
+
+.brand-name {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.brand-tagline {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.auth-card {
+  width: 100%;
+  padding: 36px 32px 28px;
+}
+
+.auth-card-header {
+  margin-bottom: 28px;
+}
+
+.auth-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.auth-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.field-row {
+  display: flex;
+  gap: 16px;
+}
+
+.flex-1 { flex: 1; }
+
+.auth-link {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 20px;
+}
+
+.link {
+  color: #a78bfa;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+.link:hover { color: #c4b5fd; text-decoration: underline; }

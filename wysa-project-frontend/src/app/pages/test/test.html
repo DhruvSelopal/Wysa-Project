@@ -1,0 +1,88 @@
+<div class="test-page">
+
+  <!-- Top bar -->
+  <header class="test-header">
+    <div class="header-brand">
+      <span class="header-logo">🧠</span>
+      <span class="header-brand-name">Wysa</span>
+    </div>
+    <div class="progress-info">
+      <span class="q-counter">Question {{ questionNumber() }}</span>
+    </div>
+  </header>
+
+  <!-- Progress bar -->
+  <!-- <div class="progress-track">
+    <div class="progress-fill" [style.width.%]="progressPercent()"></div>
+  </div> -->
+
+  <!-- Main content -->
+  <main class="test-main">
+    @if (displayQuestion(); as q) {
+      <div class="question-card card fade-in" [attr.key]="q.id">
+
+        @if (isViewingHistory()) {
+          <div class="history-badge">⏪ Reviewing previous answer</div>
+        }
+
+        <p class="module-label">{{ q.module }}</p>
+        <h2 class="question-text">{{ q.text }}</h2>
+
+        <!-- Options -->
+        <div class="options-list">
+          @for (option of q.options; track option.optionId) {
+            <button
+              class="option-btn"
+              [class.selected]="selectedOptionId() === option.optionId"
+              [disabled]="isLoading()"
+              (click)="selectOption(option.optionId)">
+              <span class="option-radio">
+                @if (selectedOptionId() === option.optionId) {
+                  <span class="radio-dot"></span>
+                }
+              </span>
+              <span class="option-text">{{ option.text }}</span>
+            </button>
+          }
+        </div>
+
+        @if (error()) {
+          <div class="alert alert-error">
+            <span>⚠️</span>
+            <span>{{ error() }}</span>
+          </div>
+        }
+
+        <!-- Actions -->
+        <div class="action-bar">
+          <button
+            id="prev-btn"
+            class="btn btn-secondary prev-btn"
+            (click)="goPrevious()"
+            [disabled]="!canGoBack() || isLoading()">
+            ← Previous
+          </button>
+
+          <button
+            id="submit-btn"
+            class="btn btn-primary submit-btn"
+            (click)="submitAnswer()"
+            [disabled]="!canSubmit()">
+            @if (isLoading()) {
+              <span class="spinner"></span>
+              <span>Submitting…</span>
+            } @else {
+              <span>Submit Answer →</span>
+            }
+          </button>
+        </div>
+
+      </div>
+    } @else {
+      <div class="loading-container">
+        <span class="spinner"></span>
+        <span>Loading question…</span>
+      </div>
+    }
+  </main>
+</div>

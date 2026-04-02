@@ -1,0 +1,60 @@
+<div class="home-page">
+  <header class="home-header">
+    <div class="header-brand">
+      <span class="header-logo">🧠</span>
+      <span class="header-brand-name">Wysa</span>
+    </div>
+    <button id="logout-btn" class="btn btn-ghost logout-btn" (click)="logout()">
+      Sign out
+    </button>
+  </header>
+
+  <main class="home-main">
+    <div class="hero-section fade-in">
+      <div class="hero-badge">Personality Assessment</div>
+      <h1 class="hero-title">Understand who<br>you truly are</h1>
+      <p class="hero-description">
+        Our adaptive personality test uses a dynamic question engine to map your unique
+        psychological profile. Answer honestly — there are no right or wrong answers.
+      </p>
+
+      @if (error()) {
+        <div class="alert alert-error" style="max-width: 420px; margin: 0 auto;">
+          <span>⚠️</span>
+          <span>{{ error() }}</span>
+        </div>
+      }
+
+      <button
+        id="start-test-btn"
+        class="btn btn-primary start-btn"
+        (click)="startTest()"
+        [disabled]="isLoading()">
+        @if (isLoading()) {
+          <span class="spinner"></span>
+          <span>Preparing your test…</span>
+        } @else {
+          <span>✨ Start Test</span>
+        }
+      </button>
+    </div>
+
+    <div class="info-grid slide-up">
+      <div class="info-card card">
+        <div class="info-icon">⚡</div>
+        <h3 class="info-title">Adaptive</h3>
+        <p class="info-body">Questions adjust dynamically based on your responses</p>
+      </div>
+      <div class="info-card card">
+        <div class="info-icon">🎯</div>
+        <h3 class="info-title">Accurate</h3>
+        <p class="info-body">Up to 15 questions calibrated to reveal your true type</p>
+      </div>
+      <div class="info-card card">
+        <div class="info-icon">🔒</div>
+        <h3 class="info-title">Private</h3>
+        <p class="info-body">Your answers are securely stored and never shared</p>
+      </div>
+    </div>
+  </main>
+</div>

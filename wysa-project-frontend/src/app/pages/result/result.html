@@ -1,0 +1,119 @@
+<div class="result-page page-center">
+
+  @if (isLoading()) {
+    <div class="loading-container fade-in">
+      <div class="loading-orb">
+        <div class="loading-pulse"></div>
+      </div>
+      <p class="loading-text">Analysing your personality…</p>
+      <p class="loading-sub">Crunching across 10 dimensions</p>
+    </div>
+  } @else if (error()) {
+    <div class="error-card card fade-in">
+      <p class="error-icon">😕</p>
+      <h2>Something went wrong</h2>
+      <p class="error-msg">{{ error() }}</p>
+      <button id="retry-result-btn" class="btn btn-primary" (click)="ngOnInit()">Try again</button>
+    </div>
+  } @else if (result()) {
+
+    <!-- Ambient background orbs -->
+    <div class="orb orb-1" [style.background]="'radial-gradient(circle, ' + result()!.primaryColor + '40 0%, transparent 70%)'"></div>
+    <div class="orb orb-2" [style.background]="'radial-gradient(circle, ' + result()!.secondaryColor + '30 0%, transparent 70%)'"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="result-scroll-container fade-in">
+
+      <!-- ══════════ HERO CARD ══════════ -->
+      <div class="hero-card card">
+        <div class="hero-badge" [style.border-color]="result()!.primaryColor + '60'">
+          <div class="hero-emoji-ring" [style.background]="'conic-gradient(' + result()!.primaryColor + ', ' + result()!.secondaryColor + ', ' + result()!.primaryColor + ')'">
+            <div class="hero-emoji-inner">
+              <span class="hero-emoji">{{ result()!.emoji }}</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="result-eyebrow">Your Personality Archetype</p>
+        <h1 class="result-archetype"
+            [ngStyle]="{
+              'background-image': 'linear-gradient(135deg, ' + result()!.primaryColor + ', ' + result()!.secondaryColor + ')',
+              '-webkit-background-clip': 'text',
+              'background-clip': 'text',
+              '-webkit-text-fill-color': 'transparent'
+            }">
+          {{ result()!.archetype }}
+        </h1>
+        <p class="result-tagline">{{ result()!.tagline }}</p>
+
+        <!-- Top modules pills -->
+        <div class="top-modules-row">
+          @for (mod of result()!.topModules; track mod; let i = $index) {
+            <span class="top-module-pill"
+                  [class.pill-1]="i === 0"
+                  [class.pill-2]="i === 1"
+                  [class.pill-3]="i === 2">
+              {{ getModuleIcon(mod) }} {{ getModuleLabel(mod) }}
+            </span>
+          }
+        </div>
+
+        <p class="result-description">{{ result()!.description }}</p>
+
+        <!-- Trait chips -->
+        <div class="traits-section">
+          <p class="section-label">Key Traits</p>
+          <div class="traits-list">
+            @for (trait of result()!.traits; track trait) {
+              <span class="trait-chip" [style.border-color]="result()!.primaryColor + '50'"
+                    [style.color]="result()!.primaryColor">
+                {{ trait }}
+              </span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ DIMENSION BREAKDOWN ══════════ -->
+      <div class="breakdown-card card">
+        <p class="section-label">Personality Dimension Scores</p>
+        <p class="breakdown-sub">How you scored across all 10 dimensions</p>
+
+        <div class="score-bars">
+          @for (ms of result()!.moduleScores; track ms.module) {
+            <div class="score-row" [class.is-top]="isTopModule(ms.module)">
+              <div class="score-row-meta">
+                <span class="score-icon">{{ getModuleIcon(ms.module) }}</span>
+                <span class="score-label">{{ getModuleLabel(ms.module) }}</span>
+                @if (isTopModule(ms.module)) {
+                  <span class="top-badge">Top</span>
+                }
+                <span class="score-pct">{{ ms.percentage }}%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"
+                     [style.width.%]="ms.percentage"
+                     [style.background]="isTopModule(ms.module)
+                       ? 'linear-gradient(90deg, ' + result()!.primaryColor + ', ' + result()!.secondaryColor + ')'
+                       : 'rgba(255,255,255,0.15)'">
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- ══════════ ACTIONS ══════════ -->
+      <div class="result-actions">
+        <button id="retake-btn" class="btn btn-secondary" (click)="retakeTest()">
+          🔄 Retake Test
+        </button>
+        <button id="go-home-btn" class="btn btn-primary" (click)="goHome()">
+          Back to Home
+        </button>
+      </div>
+
+    </div><!-- end scroll container -->
+  }
+
+</div>
